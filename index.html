@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			div {
+				margin-bottom: 5px;
+			}
+
+            li {
+                min-height: 24px;
+            }
+
+            .orange {
+                background-color: orange;
+            }
+
+            button {
+                margin-bottom: 3px;
+            }
+            
+        </style>
+        
+		<script src="notes.js"></script>
+		<script src="audio.js"></script>
+        <script src="parser.js"></script>
+        <script src="presets.js"></script>
+        <script src="inputHandler.js"></script>
+	</head>
+	<body>
+		<h1>Pure Chords</h1>
+        
+        <h3>Note input</h3>
+        <textarea id="textarea" rows="10" cols="60"></textarea>
+        <div>
+            <button id='update-button'>Update Frequencies</button>
+            <a href="#help">Syntax guide</a>
+        </div>
+        <h3>Frequencies</h3>
+        <ul style="list-style: none;" id='freq-list'>
+        </ul>
+
+        <h3>Playback Settings</h3>
+        <div>
+            <button id='playpause-button'>▶</button>
+        </div>
+        <div>
+            <label for='eqt-input'>Lock to nearest equal temperament</label>
+            <input type='checkbox' id = 'eqt-input'>
+        </div>
+        <div>
+			<label for="volume-input">Master Volume</label>
+			<input type="range" id = "volume-input" min = "-1" max = "1" step = "0.1" value ="0">
+        </div>
+        <div>
+            Wave type: 
+            <label class="radio-inline">
+                <input type="radio" name="optradio" checked id = 'sine-input'>Sine
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" id = 'sawtooth-input'>Sawtooth
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" id = 'triangle-input'>Triangle
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="optradio" id = 'square-input'>Square
+            </label>
+        </div>
+
+        <div>
+            Play as: 
+            <label class="radio-inline">
+                <input type="radio" name="2" checked id = 'chord-input'>Chord
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="2" id = 'arpeggio-input'>Arpeggio
+            </label>
+        </div>
+
+
+        <h3>Presets</h3>
+        <div>
+            All presets tuned with just intonation. To listen to the equal temperament version toggle the "Lock to nearest equal temperament" checkbox. 
+        </div>
+        <div style="max-width: 500px;">
+            <button onclick="applyPreset('octave')">Octave</button>
+            <button onclick="applyPreset('perfect5th')">Perfect 5th</button>
+            <button onclick="applyPreset('perfect4th')">Perfect 4th</button>
+            <button onclick="applyPreset('major3rd')">Major 3rd</button>
+            <button onclick="applyPreset('major6th')">Major 6th</button>
+            <button onclick="applyPreset('minor3rd')">Minor 3rd</button>
+            <button onclick="applyPreset('minor6th')">Minor 6th</button>
+            <button onclick="applyPreset('majortriad')">Major Triad</button>
+            <button onclick="applyPreset('minortriad')">Minor Triad</button>
+            <button onclick="applyPreset('dominant7th')">Dominant 7th</button>
+            <button onclick="applyPreset('overtone')">Overtone Series</button>
+            <button onclick="applyPreset('extendedovertone')">Extended Overtone Series</button>
+            <button onclick="applyPreset('rising5ths')">Rising 5ths</button>
+            <button onclick="applyPreset('rising4ths')">Rising 4ths</button>
+            <button onclick="applyPreset('majorscale')">Major Scale</button>
+            <button onclick="applyPreset('minorscale')">Minor Scale</button>
+            <button onclick="applyPreset('chromatic')">Chormatic</button>
+            
+        </div>
+
+        <a id='help'></a>
+        <h3>Help</h3>
+        <ul>
+            <li>
+                Each line in the text box represents a note
+            </li>
+            <li>
+                Notes can be entered as a frequency ("440Hz"), as a key ("C#4"), or as a ratio of to another note entered earlier in the list. 
+            </li>
+            <li>
+                For entering as a ratio, use the format "(index) * ratio" or "(index) * n/d". Index represents the line number of the reference note. "ratio" can be any floating point number. Or you can enter ratio as a fraction "n/d" where n and d are integers.
+            </li>
+            <li>
+                For better understanding, see the presets.
+            </li>
+        </ul>
+
+	</body>
+</html>
